@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CoreClick.io – Electronics Repair & Booking</title>
+  <meta name="description" content="Fast, reliable mobile, laptop & tablet repair. Book doorstep or in‑store service via WhatsApp in seconds." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --primary:#2a6df6; --secondary:#ff8c42; --dark:#0f172a; --text:#334155; --muted:#94a3b8; --bg:#f6f8fb; --radius:16px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--text);background:var(--bg)}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{width:min(1120px,92%);margin-inline:auto}
+
+    /* NAV */
+    .nav{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #e5e7eb}
+    .nav .row{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{display:flex;gap:10px;align-items:center}
+    .logo{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--primary),#6aa6ff);display:grid;place-items:center;color:#fff;font-weight:700}
+    .brand h1{font-size:1.25rem;color:var(--dark);margin:0}
+    .navlinks{display:flex;gap:20px}
+    .navlinks a{padding:10px 14px;border-radius:10px}
+    .navlinks a:hover{background:#f1f5f9}
+    .cta{background:var(--primary);color:#fff;padding:10px 16px;border-radius:12px;font-weight:600}
+
+    /* HERO */
+    .hero{background:linear-gradient(120deg,#0e2a87 0%, #2a6df6 55%, #5fa8ff 100%);color:#fff}
+    .hero .row{display:grid;grid-template-columns:1.2fr 1fr;gap:36px;align-items:center;padding:64px 0}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.15);backdrop-filter:saturate(140%) blur(6px);border:1px solid rgba(255,255,255,.25);padding:6px 12px;border-radius:999px;font-size:.85rem}
+    .hero h2{font-size:clamp(1.8rem,3.4vw,3rem);line-height:1.15;margin:14px 0 12px}
+    .hero p{opacity:.95;margin:0 0 18px}
+    .badges{display:flex;gap:14px;flex-wrap:wrap;margin:18px 0}
+    .badge{background:#fff;color:#0f172a;padding:8px 12px;border-radius:999px;font-weight:600;font-size:.9rem}
+    .hero .card{background:#fff;color:var(--text);padding:18px;border-radius:var(--radius);box-shadow:0 20px 50px rgba(0,0,0,.18)}
+
+    /* SECTION */
+    .section{padding:56px 0}
+    .section h3{font-size:clamp(1.4rem,2.6vw,2rem);color:var(--dark);text-align:center;margin:0 0 8px}
+    .section p.lead{text-align:center;color:#64748b;margin:0 0 26px}
+    .grid{display:grid;gap:20px}
+
+    /* CARDS */
+    .card{background:#fff;border:1px solid #edf2f7;border-radius:var(--radius);padding:18px;transition:transform .25s ease, box-shadow .25s ease}
+    .card:hover{transform:translateY(-6px);box-shadow:0 16px 36px rgba(2,6,23,.12)}
+    .icon{width:52px;height:52px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#eef2ff,#e0e7ff);color:#334155;margin-bottom:10px}
+
+    /* PRICING */
+    .pricing{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+    .price{border:1px solid #e5e7eb;border-radius:var(--radius);padding:22px;background:#fff;position:relative}
+
+    /* BOOKING */
+    .booking{grid-template-columns:1.1fr 1fr;align-items:start}
+    .panel{background:#fff;border-radius:var(--radius);padding:22px;border:1px solid #e5e7eb}
+    label{font-weight:600;font-size:.9rem;margin:10px 0 6px;display:block}
+    input,select,textarea{width:100%;padding:12px 14px;border-radius:12px;border:1px solid #e5e7eb;outline:none;font-size:1rem}
+    input:focus,select:focus,textarea:focus{border-color:#cbd5e1;box-shadow:0 0 0 4px rgba(42,109,246,.12)}
+    .row2{display:grid;gap:14px;grid-template-columns:1fr 1fr}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 16px;border-radius:12px;background:var(--primary);color:#fff;font-weight:600;border:none;cursor:pointer}
+    .btn.secondary{background:#0ea5e9}
+
+    /* FAQ */
+    .faq{max-width:860px;margin-inline:auto}
+    details{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px;margin:10px 0}
+    summary{cursor:pointer;font-weight:700;color:var(--dark)}
+
+    /* FOOTER */
+    footer{background:#0b1020;color:#cbd5e1;margin-top:60px}
+    footer .row{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:26px;padding:40px 0}
+    .footbar{border-top:1px solid #223051;padding:12px 0;color:#94a3b8}
+
+    /* FLOAT */
+    .float{position:fixed;right:18px;bottom:18px;display:flex;flex-direction:column;gap:10px;z-index:60}
+    .float a{display:flex;align-items:center;gap:8px;padding:12px 14px;border-radius:999px;color:#fff;font-weight:700;box-shadow:0 8px 18px rgba(0,0,0,.18)}
+    .fab-wa{background:#25d366}
+    .fab-call{background:#ef4444}
+
+    /* NEW SECTIONS */
+    .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+    .process{display:flex;gap:18px;flex-wrap:wrap}
+    .process .step{flex:1;min-width:160px;background:#fff;padding:18px;border-radius:12px;border:1px solid #edf2f7;text-align:center}
+    .brands{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:18px;align-items:center}
+    .brand-logo{background:#fff;border-radius:12px;padding:12px;box-shadow:0 6px 18px rgba(2,6,23,.06);text-align:center}
+
+    .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+    .testimonial-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+    .testimonial{background:linear-gradient(180deg,#ffffff,#f8fafc);padding:18px;border-radius:12px;border:1px solid #edf2f7}
+    .team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px}
+    .member{background:#fff;border-radius:12px;padding:14px;text-align:center;border:1px solid #edf2f7}
+
+    .contact-grid{display:grid;grid-template-columns:1fr 360px;gap:18px}
+    .map{border-radius:12px;overflow:hidden;border:1px solid #e5e7eb}
+
+    /* small screens */
+    @media (max-width:980px){.hero .row{grid-template-columns:1fr}.booking{grid-template-columns:1fr}footer .row{grid-template-columns:1fr 1fr}.contact-grid{grid-template-columns:1fr}.process{flex-direction:column}}
+    @media (max-width:640px){.navlinks{display:none}footer .row{grid-template-columns:1fr}.row2{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="nav">
+    <div class="container row">
+      <div class="brand">
+        <div class="logo">CC</div>
+        <h1>CoreClick.io</h1>
+      </div>
+      <div class="navlinks">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#process">How it Works</a>
+        <a href="#team">Team</a>
+        <a href="#contact" class="cta">Book Now</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="container row">
+      <div>
+        <span class="eyebrow">⚡ Fastest mobile & laptop repairs</span>
+        <h2>Fast. Honest. Guaranteed.<br/>Doorstep or In‑Store Service</h2>
+        <p>Certified technicians, genuine parts & transparent pricing. Book in 30 seconds and chat with us on WhatsApp.</p>
+        <div class="badges">
+          <span class="badge">Free Diagnosis</span>
+          <span class="badge">3–12 Month Warranty</span>
+          <span class="badge">No‑Fix No‑Fee</span>
+        </div>
+        <a class="cta" href="#book">Book a Repair</a>
+      </div>
+      <div class="card">
+        <img src="https://t3.ftcdn.net/jpg/02/40/25/00/360_F_240250083_uv4BiZdDXnE11RxoDm3DoLEaAEs0X28H.jpg?q=80&w=1200&auto=format&fit=crop" alt="Tech repair" style="border-radius:12px">
+      </div>
+    </div>
+  </header>
+
+  <!-- ABOUT -->
+  <section id="about" class="section container">
+    <h3>About CoreClick.io</h3>
+    <p class="lead">At CoreClick.io (CoreClick.io) we combine certified technicians, genuine parts and a customer‑first process to make repairs fast, transparent and worry‑free.</p>
+    <div class="grid" style="grid-template-columns:1fr 1fr;gap:24px;margin-top:18px">
+      <div class="card">
+        <h4 style="margin-top:0">Our Mission</h4>
+        <p class="muted">To deliver quick, trustworthy and affordable device repairs — whether at your doorstep or in store — with clear pricing and reliable warranty.</p>
+        <ul style="margin:12px 0 0;padding-left:18px;color:var(--muted)">
+          <li>Transparent pricing & free diagnosis</li>
+          <li>Genuine, high‑grade replacement parts</li>
+          <li>Verified technicians with background checks</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4 style="margin-top:0">Our Story</h4>
+        <p class="muted">Founded by technicians and product people, we noticed customers were confused by hidden fees and long turnarounds. CoreClick.io was built to change that — simple booking, real‑time updates and fair guarantees.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE US -->
+  <section id="why" class="section container">
+    <h3>Why Choose CoreClick.io</h3>
+    <p class="lead">We focus on trust, speed and quality. Here are the core reasons customers choose us.</p>
+    <div class="features">
+      <div class="card">
+        <div class="icon">🔧</div>
+        <h4>Certified Technicians</h4>
+        <p class="muted">Experienced and background‑verified experts for every device.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🛠️</div>
+        <h4>Genuine Parts</h4>
+        <p class="muted">We use high‑grade components to ensure longevity and performance.</p>
+      </div>
+      <div class="card">
+        <div class="icon">⏱️</div>
+        <h4>Fast Turnaround</h4>
+        <p class="muted">Many common repairs completed within 60–120 minutes.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🔒</div>
+        <h4>Warranty & Safety</h4>
+        <p class="muted">3–12 months warranty and secure handling of personal data.</p>
+      </div>
+      <div class="card">
+        <div class="icon">📱</div>
+        <h4>Free Secondary Handset</h4>
+        <p class="muted">Get a temporary handset to use while your phone is being repaired, or switch your damaged device with a substitute phone.</p>
+      </div>
+    </div>
+</section>
+<!-- PROCESS -->
+  <section id="process" class="section container">
+    <h3>How it Works</h3>
+    <p class="lead">Booking and repair in four simple steps.</p>
+    <div class="process" style="margin-top:18px">
+      <div class="step">
+        <div style="font-size:28px">1</div>
+        <h4>Book</h4>
+        <p class="muted">Choose device, issue and preferred time — confirm via WhatsApp.</p>
+      </div>
+      <div class="step">
+        <div style="font-size:28px">2</div>
+        <h4>Diagnose</h4>
+        <p class="muted">Free diagnosis & final quote — no hidden fees.</p>
+      </div>
+      <div class="step">
+        <div style="font-size:28px">3</div>
+        <h4>Repair</h4>
+        <p class="muted">Certified technicians fix the device using genuine parts.</p>
+      </div>
+      <div class="step">
+        <div style="font-size:28px">4</div>
+        <h4>Deliver</h4>
+        <p class="muted">Doorstep delivery or in‑store pickup with warranty details.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BRANDS -->
+  <section id="brands" class="section container">
+    <h3>Brands We Repair</h3>
+    <p class="lead">We service all major manufacturers and models.</p>
+    <div class="brands" style="margin-top:18px">
+      <div class="brand-logo">Apple</div>
+      <div class="brand-logo">Samsung</div>
+      <div class="brand-logo">OnePlus</div>
+      <div class="brand-logo">Xiaomi</div>
+      <div class="brand-logo">Dell</div>
+      <div class="brand-logo">HP</div>
+      <div class="brand-logo">Lenovo</div>
+      <div class="brand-logo">Realme</div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery" class="section container">
+    <h3>Gallery — Before & After</h3>
+    <p class="lead">A few snapshots from our recent repairs.</p>
+    <div class="gallery" style="margin-top:18px">
+      <img src="https://via.placeholder.com/400x260?text=Before+Screen" alt="before-screen" class="card" style="padding:0">
+      <img src="https://via.placeholder.com/400x260?text=After+Screen" alt="after-screen" class="card" style="padding:0">
+      <img src="https://via.placeholder.com/400x260?text=Board+Repair" alt="board" class="card" style="padding:0">
+      <img src="https://via.placeholder.com/400x260?text=Battery+Swap" alt="battery" class="card" style="padding:0">
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials" class="section container">
+    <h3>What Customers Say</h3>
+    <p class="lead">Real reviews from verified customers.</p>
+    <div class="testimonial-row" style="margin-top:18px">
+      <div class="testimonial">
+        <p>"Quick turnaround and honest pricing. Repaired my iPhone in under 2 hours — recommended."</p>
+        <p style="font-weight:700;margin-top:8px">— Anjali K.</p>
+      </div>
+      <div class="testimonial">
+        <p>"Technician was professional and explained the issue clearly. Warranty included."</p>
+        <p style="font-weight:700;margin-top:8px">— Rohit A.</p>
+      </div>
+      <div class="testimonial">
+        <p>"Doorstep pickup saved my day. Great communication on WhatsApp."</p>
+        <p style="font-weight:700;margin-top:8px">— Sunil P.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section id="team" class="section container">
+    <h3>Meet Our Technicians</h3>
+    <p class="lead">Experienced, verified and customer‑focused.</p>
+    <div class="team-grid" style="margin-top:18px">
+      <div class="member">
+        <img src="https://via.placeholder.com/140?text=AR" alt="member" style="border-radius:999px;margin:0 auto 10px">
+        <h4 style="margin:6px 0 4px">Rohit Agarwal</h4>
+        <p class="muted">Senior Technician — Mobile & Board Repair</p>
+      </div>
+      <div class="member">
+        <img src="https://via.placeholder.com/140?text=SK" alt="member" style="border-radius:999px;margin:0 auto 10px">
+        <h4 style="margin:6px 0 4px">Pappu</h4>
+        <p class="muted">Diagnostics & Quality Assurance</p>
+      </div>
+      <div class="member">
+        <img src="https://via.placeholder.com/140?text=RP" alt="member" style="border-radius:999px;margin:0 auto 10px">
+        <h4 style="margin:6px 0 4px">Nikhil</h4>
+        <p class="muted">Doorstep Operations Lead</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT / LOCATION -->
+  <section id="contact" class="section container">
+    <h3>Contact & Store</h3>
+    <p class="lead">Reach us via WhatsApp, phone or visit our store.</p>
+    <div class="contact-grid" style="margin-top:18px">
+      <div>
+        <div class="card" style="margin-bottom:14px">
+          <h4 style="margin-top:0">Quick Contact</h4>
+          <p class="muted">Chat on WhatsApp or call us. We're available 9:00–21:00 every day.</p>
+          <p style="margin:10px 0"><strong>WhatsApp:</strong> <a href="https://wa.me/918407999250" target="_blank">+91 84079 99250</a></p>
+          <p style="margin:10px 0"><strong>Phone:</strong> <a href="tel:+918407999250">+91 84079 99250</a></p>
+          <p style="margin:10px 0"><strong>Store:</strong> CoreClick Studio, Pune (Aundh Road area)</p>
+          <a class="btn" href="#book">Book Now</a>
+        </div>
+
+        <div class="card">
+          <h4 style="margin-top:0">Operating Hours</h4>
+          <ul style="margin:8px 0 0;padding-left:18px;color:var(--muted)">
+            <li>Mon–Sun: 9:00 — 21:00</li>
+            <li>Emergency doorstep support available</li>
+          </ul>
+        </div>
+      </div>
+
+      <div>
+        <div class="map">
+          <!-- Static embed: replace the src query with your store coordinates if available -->
+          <iframe src="https://www.google.com/maps/dir//Aundh+Rd,+QMTI+quarters,+Range+Hills,+Pune,+Maharashtra+411020/@18.5678045,73.9424852,13.55z/data=!4m8!4m7!1m0!1m5!1m1!1s0x61851495b5a337e9:0x3ac0df5758383cff!2m2!1d73.8335494!2d18.562303?entry=ttu&g_ep=EgoyMDI1MTIwNy4wIKXMDSoKLDEwMDc5MjA3M0gBUAM%3D" width="100%" height="360" style="border:0" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXISTING SECTIONS: SERVICES, PRICING, BOOKING, FAQ, FOOTER (slightly adjusted) -->
+  <!-- SERVICES -->
+  <section id="services" class="section container">
+    <h3>Popular Repair Services</h3>
+    <p class="lead">We service all major brands – Apple, Samsung, Xiaomi, OnePlus, Dell, HP and more.</p>
+    <div class="grid services">
+      <div class="card"><div class="icon">🪛</div><h4>Screen Replacement</h4><p class="muted">Original‑grade displays with calibration.</p></div>
+      <div class="card"><div class="icon">🔋</div><h4>Battery Swap</h4><p class="muted">High‑cycle batteries with warranty.</p></div>
+      <div class="card"><div class="icon">💧</div><h4>Liquid Damage</h4><p class="muted">Board‑level ultrasonic cleaning.</p></div>
+      <div class="card"><div class="icon">🔌</div><h4>Charging Port</h4><p class="muted">Fast & safe connector replacements.</p></div>
+      <div class="card"><div class="icon">📷</div><h4>Camera & Speaker</h4><p class="muted">Crystal‑clear audio & photos again.</p></div>
+      <div class="card"><div class="icon">🧰</div><h4>Software Fix</h4><p class="muted">OS, boot & performance issues solved.</p></div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" class="section container">
+    <h3>Transparent Pricing</h3>
+    <p class="lead">Indicative prices — final quote after free diagnosis.</p>
+    <div class="grid pricing">
+      <div class="price"><span class="tag">MOST POPULAR</span><h4>Mobile Repairs</h4><p class="muted">Screen / Battery / Speaker</p><div class="amt">₹799–₹5,999</div></div>
+      <div class="price"><h4>Laptop Repairs</h4><p class="muted">SSD / Keyboard / Fan / OS</p><div class="amt">₹999–₹8,999</div></div>
+      <div class="price"><h4>Doorstep Visit</h4><p class="muted">Within city limits</p><div class="amt">₹0–₹299</div></div>
+    </div>
+  </section>
+
+  <!-- BOOKING -->
+  <section id="book" class="section">
+    <div class="container grid booking">
+      <div class="panel">
+        <h3 style="margin-top:0">Book a Repair</h3>
+        <p class="muted">Tell us about your device and preferred slot. We’ll confirm on WhatsApp instantly.</p>
+        <form id="bookingForm" autocomplete="on">
+          <label for="device">Device Type</label>
+          <select id="device" required>
+            <option value="">Select</option>
+            <option>Mobile</option>
+            <option>Laptop</option>
+            <option>Tablet</option>
+            <option>Other</option>
+          </select>
+
+          <label for="brand">Brand (optional)</label>
+          <input id="brand" type="text" placeholder="Apple / Samsung / Dell / HP ..." />
+
+          <label for="model">Model</label>
+          <input id="model" type="text" placeholder="e.g. iPhone 13, Galaxy S22, Dell 5510" required />
+
+          <label for="service">Service Needed</label>
+          <select id="service" required>
+            <option value="">Select a service</option>
+            <option>Screen Replacement</option>
+            <option>Battery Issue</option>
+            <option>Charging Port</option>
+            <option>Speaker / Mic</option>
+            <option>Water Damage</option>
+            <option>Software / Other</option>
+          </select>
+
+          <label for="issue">Short Description</label>
+          <textarea id="issue" rows="3" placeholder="What's wrong with the device?" required></textarea>
+
+          <div class="row2">
+            <div>
+              <label for="date">Preferred Date</label>
+              <input id="date" type="date" required />
+            </div>
+            <div>
+              <label for="time">Preferred Time</label>
+              <input id="time" type="time" required />
+            </div>
+          </div>
+
+          <label for="mode">Service Mode</label>
+          <select id="mode" required>
+            <option value="Doorstep">Doorstep Pickup</option>
+            <option value="Store">Visit Store</option>
+          </select>
+
+          <div id="addressWrap">
+            <label for="address">Pickup Address</label>
+            <textarea id="address" rows="2" placeholder="House/Flat, Street, Area, City & Pincode"></textarea>
+          </div>
+
+          <div class="row2">
+            <div>
+              <label for="name">Your Name</label>
+              <input id="name" type="text" placeholder="Full name" required />
+            </div>
+            <div>
+              <label for="phone">Phone Number</label>
+              <input id="phone" type="tel" placeholder="10‑digit mobile" pattern="[0-9]{10}" required />
+            </div>
+          </div>
+
+          <button class="btn" type="submit">Book on WhatsApp</button>
+          <p class="muted" style="margin-top:10px">By booking, you agree to our Terms & Privacy.</p>
+        </form>
+      </div>
+      <div class="panel">
+        <h4 style="margin:0 0 10px;color:var(--dark)">Why choose CoreClick.io?</h4>
+        <ul style="line-height:1.9;margin:0;padding-left:20px">
+          <li>Expert, background‑verified technicians</li>
+          <li>Only high‑grade & genuine parts used</li>
+          <li>3–12 months repair warranty</li>
+          <li>Real‑time WhatsApp updates</li>
+          <li>No‑fix, no‑fee policy</li>
+        </ul>
+        <hr style="margin:18px 0;border:none;border-top:1px solid #e5e7eb">
+        <h4 style="margin:0 0 10px;color:var(--dark)">Need help now?</h4>
+        <p class="muted">Tap to chat. We're online 9am–9pm.</p>
+        <a class="btn secondary" href="https://wa.me/918407999250" target="_blank">Chat on WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container faq">
+      <h3>Frequently Asked Questions</h3>
+      <details>
+        <summary>How long does a typical repair take?</summary>
+        <p class="muted">Many issues are fixed within 60–120 minutes. Complex board repairs may take 1–3 days depending on parts availability.</p>
+      </details>
+      <details>
+        <summary>Do you offer doorstep service?</summary>
+        <p class="muted">Yes. Choose <b>Doorstep Pickup</b> while booking and share your address. Visit‑store is also available.</p>
+      </details>
+      <details>
+        <summary>Is there a warranty?</summary>
+        <p class="muted">Absolutely. We provide 3–12 months warranty depending on the part and device category.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container row">
+      <div>
+        <div class="brand" style="margin-bottom:10px">
+          <div class="logo">CC</div>
+          <h1 style="color:#fff;margin:0">CoreClick.io</h1>
+        </div>
+        <p style="margin-top:6px;color:#94a3b8">Trusted electronics repair for phones, laptops and tablets. Book online and get transparent pricing.</p>
+      </div>
+      <div>
+        <h4 style="color:#e2e8f0;margin:0 0 8px">Quick Links</h4>
+        <a href="#services">Services</a><br/>
+        <a href="#pricing">Pricing</a><br/>
+        <a href="#book">Book Now</a>
+      </div>
+      <div>
+        <h4 style="color:#e2e8f0;margin:0 0 8px">Support</h4>
+        <a href="https://wa.me/918407999250" target="_blank">WhatsApp</a><br/>
+        <a href="tel:+918407999250">Call +91 84079 99250</a><br/>
+        <span>Mon–Sun, 9:00–21:00</span>
+      </div>
+    </div>
+    <div class="footbar">
+      <div class="container">© <span id="yr"></span> CoreClick.io. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <!-- Floating actions -->
+  <div class="float">
+    <a class="fab-wa" href="https://wa.me/918407999250" target="_blank">💬 WhatsApp</a>
+    <a class="fab-call" href="tel:+918407999250">📞 Call</a>
+  </div>
+
+  <script>
+    // Footer year & min date
+    document.getElementById('yr').textContent = new Date().getFullYear();
+    const dateEl = document.getElementById('date');
+    const today = new Date();
+    const iso = new Date(today.getTime() - (today.getTimezoneOffset()*60000)).toISOString().split('T')[0];
+    if(dateEl) dateEl.min = iso;
+
+    // Toggle address for Doorstep vs Store
+    const mode = document.getElementById('mode');
+    const addressWrap = document.getElementById('addressWrap');
+    const address = document.getElementById('address');
+    function toggleAddress(){
+      const doorstep = mode && mode.value === 'Doorstep';
+      if(addressWrap) addressWrap.style.display = doorstep ? 'block' : 'none';
+      if(address) address.required = doorstep;
+    }
+    if(mode) {mode.addEventListener('change', toggleAddress); toggleAddress();}
+
+    // Booking → WhatsApp
+    const form = document.getElementById('bookingForm');
+    if(form){
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        const payload = {
+          device: document.getElementById('device').value,
+          brand: document.getElementById('brand').value,
+          model: document.getElementById('model').value,
+          service: document.getElementById('service').value,
+          issue: document.getElementById('issue').value,
+          date: document.getElementById('date').value,
+          time: document.getElementById('time').value,
+          mode: document.getElementById('mode').value,
+          address: document.getElementById('address').value,
+          name: document.getElementById('name').value,
+          phone: document.getElementById('phone').value
+        };
+
+        const lines = [
+          '📱 *New Repair Booking*',
+          `👤 Name: ${payload.name}`,
+          `📞 Phone: ${payload.phone}`,
+          `💻 Device: ${payload.device}${payload.brand? ' ('+payload.brand+')':''}`,
+          `🔍 Model: ${payload.model}`,
+          `🛠 Service: ${payload.service}`,
+          `📝 Issue: ${payload.issue}`,
+          `📅 Date: ${payload.date}`,
+          `⏰ Time: ${payload.time}`,
+          `🚚 Mode: ${payload.mode}`,
+          payload.mode==='Doorstep' && payload.address ? `📍 Address: ${payload.address}` : null
+        ].filter(Boolean);
+
+        const text = encodeURIComponent(lines.join('\n'));
+        const wa = `https://wa.me/918407999250?text=${text}`;
+        window.open(wa, '_blank');
+
+        alert('Booking details opened in WhatsApp. Please press Send to confirm.');
+        form.reset();
+        toggleAddress();
+      });
+    }
+  </script>
+</body>
+</html>
